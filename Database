@@ -1,0 +1,38 @@
+CREATE DATABASE IF NOT EXISTS test1;
+
+USE test1;
+
+CREATE TABLE employees (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    basic_salary DOUBLE NOT NULL,
+    net_salary DOUBLE NOT NULL,
+    insurance DOUBLE NOT NULL,
+    position VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE departments (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    number_of_employees INT DEFAULT 0,
+    room_number INT NOT NULL,
+    manager_id BIGINT DEFAULT NULL,
+    FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE SET NULL
+);
+
+INSERT INTO departments (name, number_of_employees, room_number, manager_id)
+VALUES
+('Lin', 10, 09, NULL),
+('Hoc IT', 15, 25, NULL),
+('Phuong', 08, 93, NULL);
+INSERT INTO employees (name, dob, address, basic_salary, net_salary, insurance, position, department_id)
+VALUES
+('Do Lan', '2004-07-11', 'HL ND SL , VP', 5000, 3000, 100, 'Manager', 1),
+('Minh Anh', '1999-09-19', 'SO 29 KL HN', 2500, 2000, 90, 'CD Manager', 2),
+('Kien ', '2003-02-12', '202 HP ', 3000, 2500, 120, 'HR Manager', 1),
+('Ha Anh', '2000-09-25', 'ND SL VP', 3200, 2000, 250, 'FK Manager', 3);
+
+
+
